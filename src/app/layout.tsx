@@ -1,10 +1,6 @@
 import "./globals.css";
 
-import type { Schema } from "../../amplify/data/resource";
-import { generateClient } from "aws-amplify/data";
-import HomeButton from "@/HomeButton";
-
-const client = generateClient<Schema>();
+import HomeButton from "./HomeButton";
 
 export default function RootLayout({
     children,
