@@ -9,29 +9,29 @@ and "delete" any "Todo" records.
 const schema = a.schema({
   Event: a.model({
     id:a.id().required(),
-    type:a.hasOne("EventType","id"),
+    type:a.belongsTo("EventType","id"),
     description: a.string(),
-    week: a.integer(),
-    day: a.integer(),
-    startTime: a.integer(),
-    endTime: a.integer(),
+    startTime: a.datetime(),
+    endTime: a.datetime(),
   }),
   EventType: a.model({
     id:a.id().required(),
     description: a.string(),
     color: a.string(),
+    event: a.hasMany('Event', 'id'),
   }),
   Exercise: a.model({
     id:a.id().required(),
-    week:a.integer(),
-    type:a.hasOne("ExerciseType","id"),
+    time:a.datetime(),
+    type:a.belongsTo("ExerciseType","id"),
     value:a.integer(),
   }),
   ExerciseType: a.model({
     id:a.id().required(),
     description: a.string(),
+    exercise: a.hasMany('Exercise', 'id'),
   }),
-});
+}).authorization((allow) => [allow.publicApiKey()]);;
 
 export type Schema = ClientSchema<typeof schema>;
 
